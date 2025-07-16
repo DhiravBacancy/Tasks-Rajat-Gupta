@@ -1,0 +1,52 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-user-details',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './user-details.component.html',
+  styles: [`
+    .user-details {
+      background-color: #f9fafb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 1rem;
+      animation: fade-in 0.3s ease-in;
+
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: #4b5563;
+        margin-bottom: 0.5rem;
+      }
+
+      .user-id {
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-style: italic;
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `]
+})
+export class UserDetailsComponent {
+  @Input() userName: string = '';
+  @Input() userId: number = 0;
+}

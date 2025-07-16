@@ -1,0 +1,49 @@
+    <div class="container">
+      <!-- Header with @if -->
+      <header class="header">
+        <h1>User Dashboard</h1>
+        @if (users.length > 0) {
+          <p class="header-subtitle">Managing {{ users.length }} users</p>
+        } @else {
+          <p class="header-warning">No users available. Please add users to continue.</p>
+        }
+      </header>
+
+      <!-- User List with @for -->
+      <section class="user-list">
+        <ul>
+          @for (user of users; track user.id) {
+            <li class="user-item">
+              <div class="user-info">
+                <span class="user-name">{{ user.name }}</span>
+                <!-- Status with @switch -->
+                @switch (user.status) {
+                  @case ('active') {
+                    <span class="status status-active">Active</span>
+                  }
+                  @case ('inactive') {
+                    <span class="status status-inactive">Inactive</span>
+                  }
+                  @case ('pending') {
+                    <span class="status status-pending">Pending</span>
+                  }
+                  @default {
+                    <span class="status status-unknown">Unknown</span>
+                  }
+                }
+              </div>
+              <!-- Defer User Details -->
+              @defer (on interaction) {
+                <app-user-details [userName]="user.name" [userId]="user.id" />
+              } @placeholder {
+                <button class="details-button">View Details</button>
+              } @loading {
+                <div class="loading">Loading details...</div>
+              } @error {
+                <div class="error">Failed to load details.</div>
+              }
+            </li>
+          }
+        </ul>
+      </section>
+    </div>
