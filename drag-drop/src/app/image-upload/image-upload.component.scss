@@ -1,0 +1,29 @@
+.draggable-key-image {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.draggable-key-image.dragging {
+  border-color: #23A49D;
+  background-color: #f0f8ff;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.text-primary-green {
+  color: #23A49D;
+  text-decoration: none;
+}
+
+.text-primary-green:hover {
+  text-decoration: underline;
+}
+
+.icurate-text-negative-5 {
+  color: #d32f2f;
+}

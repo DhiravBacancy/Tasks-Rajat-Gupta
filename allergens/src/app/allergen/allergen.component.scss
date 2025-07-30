@@ -1,0 +1,71 @@
+// Utility classes
+.c-pointer {
+  cursor: pointer;
+}// Custom allergen button styles (minimal overrides)
+.custom-allergen-button {
+  background-color: #fff;
+  color: #6f6d7c;
+  border: 1px solid #6f6d7c;
+  padding: 12px;
+  
+  &.may-contain {
+    border: 1px solid #c88233;
+    color: #c88233;
+  }
+  
+  &.contain {
+    border: 1px solid #b32936;
+    color: #b32936;
+  }
+}
+
+// Dropdown positioning
+.allergen-contains {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  
+  .status-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    min-width: 130px;
+  }
+  
+  .bg-light-red {
+    border-radius: 100px;
+    border: 1px solid #b32936;
+    color: #b32936;
+    background-color: #fff;
+    &:hover {
+      background-color: #f9d6da;
+      border: 1px solid transparent;
+    }
+  }
+  
+  .bg-light-yellow {
+    border-radius: 100px;
+    border: 1px solid #c88233;
+    color: #c88233;
+    background-color: #fff;
+    &:hover {
+      background-color: #fdecd9;
+      border: 1px solid transparent;
+    }
+  }
+  
+  .bg-light-default {
+    background-color: #fff;
+    border-radius: 100px;
+    border: 1px solid #6f6d7c;
+    color: #6f6d7c;
+    &:hover {
+      background-color: #e9e9e9;
+      border: 1px solid transparent;
+    }
+  }
+}

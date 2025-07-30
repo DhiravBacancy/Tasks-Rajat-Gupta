@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonService } from './common.service';
+import { ChildComponent } from './child/child.component';
 
 @Component({
   selector: 'app-root',
   template: `
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class=" flex items-center justify-center bg-gray-100">
       <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Zone-based Counter</h1>
         <div class="text-center mb-6">
@@ -20,7 +21,9 @@ import { CommonService } from './common.service';
         </div>
       </div>
     </div>
+    <app-child [test2]="counter"/>
   `,
+  imports: [ChildComponent]
 })
 export class AppComponent {
   counter = 0;
@@ -30,7 +33,8 @@ export class AppComponent {
   }
 
   increment() {
-    this.service.increment();
+    // this.service.increment();
+    this.counter++;
   }
 
   startAsync() {

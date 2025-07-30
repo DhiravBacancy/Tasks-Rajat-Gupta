@@ -4,5 +4,5 @@ import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideExperimentalZonelessChangeDetection()]
+  providers: [provideRouter(routes)]
 };

@@ -1,0 +1,13 @@
+<div class="donut-chart-wrapper">
+
+  <div class="chart-and-legend">
+    <div #chartContainer class="chart"></div>
+
+    <ul class="legend">
+      <li *ngFor="let item of legendItems">
+        <span class="legend-dot" [style.background-color]="item.color"></span>
+        <span class="legend-text">{{ item.label }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

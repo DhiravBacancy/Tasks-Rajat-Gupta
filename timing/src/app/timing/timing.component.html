@@ -1,0 +1,96 @@
+<div>
+    <!-- Timing Content -->
+    <div class="timing-content m-5" [class.collapsed]="isCollapsed()">
+    <div class="row g-4">
+        <!-- Total Time Display -->
+        <div class="col-12 col-lg-4">
+        <div class="total-time-card">
+            <div class="d-flex align-items-center">
+            <div class="time-icon-wrapper me-3">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="time-icon">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.7L16.2,16.2Z" />
+                </svg>
+            </div>
+            <div>
+                <h6 class="mb-1 text-muted">Total Time</h6>
+                <h3 class="mb-0 fw-bold text-dark">{{ totalTime().formatted }}</h3>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="col-12 col-lg-1 d-flex align-items-center justify-content-center">
+        <div class="vertical-divider d-none d-lg-block"></div>
+        <div class="horizontal-divider d-lg-none"></div>
+        </div>
+
+        <!-- Time Controls -->
+        <div class="col-12 col-lg-7">
+        <div class="row g-4">
+            <!-- Prep Time -->
+            <div class="col-12 col-md-6">
+            <div class="time-control-card">
+                <h6 class="card-title mb-3">Prep Time (in mins)</h6>
+                <div class="time-input-group">
+                <button 
+                    class="btn btn-outline-secondary time-btn"
+                    (click)="adjustPrepTime(-1)"
+                    [disabled]="prepTime() <= 0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,13H5V11H19V13Z" />
+                    </svg>
+                </button>
+                <input 
+                    type="number" 
+                    class="form-control time-input"
+                    [value]="prepTime()"
+                    (input)="onPrepTimeInput($event)"
+                    min="0"
+                    max="9999">
+                <button 
+                    class="btn btn-outline-secondary time-btn"
+                    (click)="adjustPrepTime(1)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                    </svg>
+                </button>
+                </div>
+            </div>
+            </div>
+
+            <!-- Cook Time -->
+            <div class="col-12 col-md-6">
+            <div class="time-control-card">
+                <h6 class="card-title mb-3">Cook Time (in mins)</h6>
+                <div class="time-input-group">
+                <button 
+                    class="btn btn-outline-secondary time-btn"
+                    (click)="adjustCookTime(-1)"
+                    [disabled]="cookTime() <= 0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,13H5V11H19V13Z" />
+                    </svg>
+                </button>
+                <input 
+                    type="number" 
+                    class="form-control time-input"
+                    [value]="cookTime()"
+                    (input)="onCookTimeInput($event)"
+                    min="0"
+                    max="9999">
+                <button 
+                    class="btn btn-outline-secondary time-btn"
+                    (click)="adjustCookTime(1)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                    </svg>
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>

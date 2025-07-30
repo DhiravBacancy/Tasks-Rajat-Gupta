@@ -1,0 +1,77 @@
+<!-- task-manager.component.html (partial update) -->
+<div class="container">
+  <h2>Task Manager</h2>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <!-- Existing title and description fields -->
+    <div class="form-group">
+      <label for="title">Task Title:</label>
+      <input id="title" formControlName="title" class="form-control" />
+      <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="error">
+        Title is required and must be at least 3 characters.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched" class="error">
+        Description is required.
+      </div>
+    </div>
+
+    <!-- Subtasks -->
+    <h3>Subtasks</h3>
+    <div formArrayName="subtasks">
+      <div *ngFor="let subtask of subtasks.controls; let i = index" [formGroupName]="i" class="subtask">
+        <input formControlName="subtaskName" placeholder="Subtask Name" class="form-control" />
+        <input formControlName="deadline" placeholder="Deadline (YYYY-MM-DD)" class="form-control" />
+        <label>
+          <input type="checkbox" formControlName="isCompleted" /> Completed
+        </label>
+        <button type="button" (click)="removeSubtask(i)" class="btn btn-danger">Remove</button>
+        <div *ngIf="subtask.get('subtaskName')?.invalid && subtask.get('subtaskName')?.touched" class="error">
+          Subtask name is required.
+        </div>
+        <div *ngIf="subtask.get('deadline')?.invalid && subtask.get('deadline')?.touched" class="error">
+          Deadline must be in YYYY-MM-DD format.
+        </div>
+
+        <!-- Dependencies -->
+        <div class="dependencies">
+          <h4>Dependencies</h4>
+          <div formArrayName="dependencies">
+            <div *ngFor="let dep of getDependencies(i).controls; let j = index" [formGroupName]="j">
+              <input formControlName="dependencyName" placeholder="Dependency Name" class="form-control" />
+              <button type="button" (click)="removeDependency(i, j)" class="btn btn-danger">Remove Dependency</button>
+              <div *ngIf="dep.get('dependencyName')?.invalid && dep.get('dependencyName')?.touched" class="error">
+                Dependency name is required.
+              </div>
+            </div>
+          </div>
+          <button type="button" (click)="addDependency(i)" class="btn btn-primary">Add Dependency</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" (click)="addSubtask()" class="btn btn-primary">Add Subtask</button>
+    <button type="button" (click)="markAllSubtasksCompleted()" class="btn btn-info">Mark All Subtasks Completed</button>
+    <button type="submit" [disabled]="taskForm.invalid" class="btn btn-success">Add Task</button>
+  </form>
+
+  <!-- Task List (unchanged) -->
+  <h3>Task List</h3>
+  <div *ngIf="tasks.length === 0">No tasks added yet.</div>
+  <ul>
+    <li *ngFor="let task of tasks; let i = index">
+      <h4>{{ task.title }}</h4>
+      <p>{{ task.description }}</p>
+      <h5>Subtasks:</h5>
+      <ul>
+        <li *ngFor="let subtask of task.subtasks">
+          {{ subtask.subtaskName }} - {{ subtask.isCompleted ? 'Completed' : 'Pending' }} (Deadline: {{ subtask.deadline || 'None' }})
+          <ul *ngIf="subtask.dependencies.length > 0">
+            <li *ngFor="let dep of subtask.dependencies">Dependency: {{ dep.dependencyName }}</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

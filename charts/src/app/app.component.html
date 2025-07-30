@@ -1,0 +1,10 @@
+@if( (bulletData | json) != '{}')
+{
+    <app-bullet-chart [data]="bulletData"></app-bullet-chart>
+}
+
+@if(donutData && donutData.length){
+    <app-donut-chart [chartData]="donutData"></app-donut-chart>
+}
+
+<b></b>

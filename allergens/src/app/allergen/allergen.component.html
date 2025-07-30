@@ -1,0 +1,88 @@
+<div class="card shadow-sm m-5">
+
+  <div class="card-body p-4 m-5">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="d-flex flex-wrap gap-3">
+            @for (item of allergens; track item.id) {
+              <div class="position-relative">
+                <button
+                  type="button"
+                  class="btn rounded-pill d-flex align-items-center gap-2 custom-allergen-button"
+                  [ngClass]="{
+                    'may-contain': item.type === 'may-contain',
+                    'contain': item.type === 'contain',
+                    'text-dark border-dark': item.clicked
+                  }"
+                  (click)="clickedAllergen(item)"
+                >
+                  <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                    <img
+                      loading="lazy"
+                      src="/icons/create-recipe/allergens/{{ item.clicked ? 'color' : item.type }}/{{ item.name | lowercase }}.svg"
+                      width="20"
+                      height="20"
+                      alt="{{ item.name }}"
+                    />
+                  </div>
+                  {{ item.name }}
+                </button>
+                @if (item.clicked) {
+                  <div class="position-absolute allergen-contains">
+                    <div class="d-flex align-items-center justify-content-center bg-light">
+                      <div class="bg-white rounded-3 shadow-lg p-4">
+                        <div class="d-flex flex-column">
+                          <div
+                            class="status-badge bg-light-red mb-3 c-pointer"
+                            (click)="onAllergensContains('contain', item)"
+                          >
+                            Contains
+                          </div>
+                          <div
+                            class="status-badge bg-light-yellow mb-3 c-pointer"
+                            (click)="onAllergensContains('may-contain', item)"
+                          >
+                            May Contain
+                          </div>
+                          <div
+                            class="status-badge bg-light-default c-pointer"
+                            (click)="onAllergensContains('default', item)"
+                          >
+                            Off
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border rounded-3 p-3 bg-light">
+            <p class="mb-2 text-uppercase small text-muted fw-semibold" style="font-size: 12px;">
+              This recipe <span class="fw-bold">contains</span>
+            </p>
+            <p class="mb-3">
+              @for (item of allergens; track item.id) {
+                @if (item.type === 'contain') {
+                  <span class="me-2">{{ item.name }}</span>
+                }
+              }
+            </p>
+            <p class="mb-2 text-uppercase small text-muted fw-semibold" style="font-size: 12px;">
+              This recipe <span class="fw-bold">may contain</span>
+            </p>
+            <p class="mb-0">
+              @for (item of allergens; track item.id) {
+                @if (item.type === 'may-contain') {
+                  <span class="me-2">{{ item.name }}</span>
+                }
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
